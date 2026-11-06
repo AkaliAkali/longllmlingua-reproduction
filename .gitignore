@@ -43,5 +43,4 @@ Thumbs.db
 # uv related things
 .python-version
 pyproject.toml
-README.md
 uv.lock

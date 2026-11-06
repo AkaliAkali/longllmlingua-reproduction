@@ -32,6 +32,37 @@ git clone --branch stage1-foundation https://github.com/SPikerinbit/longllmlingu
 cd longllmlingua-reproduction
 ```
 
+## 第二阶段：压缩方法与机制验证
+
+第二阶段在 `stage2-compression` 分支进行，承接第一阶段的数据、模板、分词器、API 缓存与评分流程：
+
+- 固定官方提交的 `PromptCompressor` 通过适配层接入（`reproduction/compression.py`），LLMLingua 与
+  LongLLMLingua 共用同一 LLaMA-2-7B-Chat 压缩模型；
+- 2x/4x 主表使用硬预算（按固定 DeepSeek 分词器实测完整提示），同时保留库自然压缩结果用于差异说明；
+- `restrict`、问题感知粗粒度、问题感知细粒度、动态预算、重排序与子序列恢复都是独立开关，逐项对照见
+  [参数映射与差异表](docs/stage2-parameter-map.md)；
+- 子序列恢复在问答之后执行，恢复前后回答都保存并都评分；逐槽位输出文档分数、保留文档、预算、
+  文本变化追踪与压缩耗时。
+
+在 Linux GPU 或 NPU 机器上运行（本机 CPU 只跑离线测试与 `plan`）：
+
+```bash
+PYTHONPATH=. python -m reproduction.stage2 plan
+PYTHONPATH=. python -m reproduction.stage2 run --limit 3
+PYTHONPATH=. python -m reproduction.stage2 run
+PYTHONPATH=. python -m reproduction.stage2 summarize outputs/stage2/<运行ID>
+PYTHONPATH=. python -m reproduction.stage2 casebook outputs/stage2/<运行ID>
+```
+
+接口、产物与已知差异见 [第二阶段实现说明](docs/stage2-implementation.md)；服务器依赖见
+[requirements-stage2.txt](requirements-stage2.txt)。模型权重不入库，路径由
+[configs/stage2.json](configs/stage2.json) 的 `compressor.model_path` 指定。
+
+本阶段 smoke 的完整逐槽记录（`results.jsonl`，约 8.6MB）、压缩/问答缓存与运行日志不进入 Git：
+仓库只保留 `reports/stage2-smoke/` 下的轻量汇总与样例。完整文件保存在成员二本地的
+`data/scratch/modelarts/`（已被 `.gitignore` 忽略）。后续组员做作业、准备报告、复核或答辩如果
+需要逐槽文件、缓存或日志，可向成员二索取。
+
 ## 填入密钥并开始运行
 
 打开根目录 **`.env`**，在 `DEEPSEEK_API_KEY=` 后填入自己的密钥。该文件已被 Git 忽略，不要把密钥写进公共配置或报告。环境变量优先于 `.env`；如存在同名旧环境变量，应先更新。
