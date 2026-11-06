@@ -39,3 +39,9 @@ dist/
 .vscode/
 Thumbs.db
 .DS_Store
+
+# uv related things
+.python-version
+pyproject.toml
+README.md
+uv.lock
