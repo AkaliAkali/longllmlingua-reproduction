@@ -1,0 +1,6 @@
+# Keep implementation fingerprints stable across Windows and Linux checkouts.
+* text=auto eol=lf
+# Preserve upstream reference bytes exactly for recorded SHA-256 checks.
+/vendor/** -text
+*.gz -text
+*.pdf -text

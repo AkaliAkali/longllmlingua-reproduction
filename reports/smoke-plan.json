@@ -1,0 +1,32 @@
+{
+  "config_hash": "621ac92b0374e28d2773616142ea7949288aea0f2d5571a812e93289b7364667",
+  "split": "smoke",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "methods": {
+    "original": {
+      "slots": 100,
+      "input_text_tokens": 300005,
+      "output_token_cap": 51200,
+      "cache_hits": 31
+    },
+    "bm25_2x": {
+      "slots": 100,
+      "input_text_tokens": 149900,
+      "output_token_cap": 51200,
+      "cache_hits": 49
+    },
+    "bm25_4x": {
+      "slots": 100,
+      "input_text_tokens": 74870,
+      "output_token_cap": 51200,
+      "cache_hits": 68
+    }
+  },
+  "max_input_text_tokens": 3549,
+  "mean_input_text_tokens": 1749.25,
+  "logical_call_limit": 300,
+  "wire_attempt_limit": 900,
+  "token_count_note": "prompt-text-only; excludes API chat framing; API usage is billing truth",
+  "api_requests_sent": 0
+}
