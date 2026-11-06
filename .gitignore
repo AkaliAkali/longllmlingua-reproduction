@@ -1,0 +1,41 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Full datasets, model weights, predictions, caches, and large runtime outputs
+/data/
+/models/
+/checkpoints/
+/cache/
+/outputs/
+/runs/
+/logs/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# Local paper archive; source directory is retained pending publication-license review
+/arXiv-2310.06839v2.tar.gz
+/arXiv-2310.06839v2/
+
+# Editor and OS state
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
