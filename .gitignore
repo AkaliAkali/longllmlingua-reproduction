@@ -30,7 +30,7 @@ dist/
 *.pt
 *.pth
 
-# Local paper archive; source directory is retained pending publication-license review
+# Local paper references; teammates can download the paper separately from arXiv
 /arXiv-2310.06839v2.tar.gz
 /arXiv-2310.06839v2/
 
@@ -39,3 +39,8 @@ dist/
 .vscode/
 Thumbs.db
 .DS_Store
+
+# uv related things
+.python-version
+pyproject.toml
+uv.lock
